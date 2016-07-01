@@ -1,0 +1,40 @@
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: grey;
+}
+
+img {
+  width: 200px;
+  height:200px;
+  margin: 20px;
+  border: 1px solid black;
+}
+
+ul {
+  height: 300px;
+  columns: 3;
+}
+
+#buttonResults {
+  width: 70px;
+  height: 40px;
+  background-color: red;
+  border: green;
+}
+
+#buttonReset {
+  width: 70px;
+  height: 40px;
+  background-color: red;
+  border: green;
+}
+#text {
+  font-size: 30px;
+  font-family: fantasy;
+}
