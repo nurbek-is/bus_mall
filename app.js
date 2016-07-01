@@ -1,7 +1,6 @@
 var allProducts = [];
 var productList = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep','scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can','wine-glass'];
 
-
 //constructor function
 function Product (name, path)  {
   this.name = name;
@@ -26,6 +25,7 @@ var tracker = {
   imgRight: document.getElementById('img3'),
   buttonResults: document.getElementById('buttonResults'),
   buttonReset : document.getElementById('buttonReset'),
+  // random number method
   getRandomNumber: function () {
     return Math.floor (Math.random ()* allProducts.length)
   },
