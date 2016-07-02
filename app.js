@@ -25,6 +25,19 @@ var tracker = {
   imgRight: document.getElementById('img3'),
   buttonResults: document.getElementById('buttonResults'),
   buttonReset : document.getElementById('buttonReset'),
+  data: {
+    labels: productList, /// this is X-AXIS
+    datasets: [ {
+      label: 'Votes',   ///  this is Y-AXIS
+      backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: []
+    }
+    ]
+  },
   // random number method
   getRandomNumber: function () {
     return Math.floor (Math.random ()* allProducts.length)
@@ -57,6 +70,7 @@ function countClicks (elementId) {
     if (elementId === allProducts[idx].name) {
       allProducts [idx].count+=1;
       tracker.totalClicks+=1;
+      tracker.data.datasets[0].data[idx] = allProducts[idx].count;
       console.log(allProducts[idx].name + ' has ' + allProducts[idx].count + ' clicks');
       console.log('Total clicks so far is ' + tracker.totalClicks);
     }
@@ -80,18 +94,13 @@ tracker.buttonReset.addEventListener ('click', function () {
 ////****PRINTING VOTE RESULTS TO THE PAGE *** ///
 
 function displayResults () {
-      var ulEl = document.createElement ('ul')
-
-      for (obj in allProducts)  {
-        var liElOne = document.createElement ('li');
-            liElOne.textContent = allProducts[obj].name.charAt(0).toUpperCase () + allProducts [obj].name.slice(1) + ' received ' + allProducts [obj].count + ' votes.';
-        ulEl.appendChild(liElOne);
-      }
-      var liElTwo = document.createElement ('li');
-        liElTwo.textContent = 'Total Votes: ' + tracker.totalClicks;
-            ulEl.appendChild (liElTwo);
-        document.getElementById('results').appendChild (ulEl);
+    var chrtId = document.getElementById('mycanvas').getContext('2d');
+      var myChart = new Chart (chrtId, {
+        type:'bar',
+        data:tracker.data,
+      });
     }
+
 
 ////****  CHECKING IF CLICKS ARE ON THE IMAGES & CLICKED 15 TIMES AND INVOKING countClicks, showButton FUNCTION  *** ///
 
