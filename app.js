@@ -1,6 +1,6 @@
 var allProducts = [];
 var productList = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep','scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can','wine-glass'];
-
+var jsonVotes;
 //constructor function
 function Product (name, path)  {
   this.name = name;
@@ -71,6 +71,9 @@ function countClicks (elementId) {
       allProducts [idx].count+=1;
       tracker.totalClicks+=1;
       tracker.data.datasets[0].data[idx] = allProducts[idx].count;
+      jsonVotes = JSON.stringify (tracker.data.datasets[0].data);
+      localStorage.setItem ('storedVotes', jsonVotes)
+      console.log (jsonVotes)
       console.log(allProducts[idx].name + ' has ' + allProducts[idx].count + ' clicks');
       console.log('Total clicks so far is ' + tracker.totalClicks);
     }
@@ -120,6 +123,14 @@ function onClick() {
     alert ('That\'s is not an image, Click on the image'); // to test click near the image but not on the image
   }
 }
+
+if (localStorage.storedVotes) {
+  tracker.data.datasets[0].data = JSON.parse(localStorage.getItem ('storedVotes'));
+  for (index in allProducts) {
+    allProducts [index].count = tracker.data.datasets[0].data[index];
+  }
+};
+
 displayImages();
 
 tracker.images.addEventListener('click', onClick);
